@@ -2,9 +2,10 @@ from random import randint
 import requests
 
 INSULTS = [
-    "Dumbass"
-    "Stupid"
-    "Stoopid"
+    "dumbass"
+    "stupid"
+    "stoopid"
+    "monkey ass"
 ]
 
 SUBJECTS = [
@@ -31,6 +32,7 @@ REACTIONS = [
     "even the clock are laughing at you.", 
     "what in the hell is wrong with ya?", 
     "YEEHAW"
+    "OH COME ON!"
 ]
 
 def get_reaction():
