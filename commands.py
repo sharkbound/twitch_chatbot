@@ -50,8 +50,9 @@ def atick_resp():
     tick = str(randint(1, 1000))
     response = [
         reaction + tick + "has passed, DUH",
-
     ]
+
+    return response[randint(0, len(response)-1)]
 
 def google_resp():
     pass
