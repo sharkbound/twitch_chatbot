@@ -1,4 +1,4 @@
-from random import randint
+from random import choice
 import requests
 
 INSULTS = [
@@ -35,19 +35,22 @@ REACTIONS = [
     "OH COME ON!"
 ]
 
-def get_reaction():
-    return REACTIONS[randint(0, len(REACTIONS)-1)]
 
-def get_subject():
-    return SUBJECTS[randint(0, len(SUBJECTS)-1)]
+def rand_reaction():
+    return choice(REACTIONS)
 
-def get_insult():
-    return INSULTS[randint(0, len(INSULTS)-1)]
+
+def rand_subject():
+    return choice(SUBJECTS)
+
+
+def rand_insult():
+    return choice(INSULTS)
 
 
 def get_user_id(client_id, channel):
-    url = 'https://api.twitch.tv/kraken/users?login='+channel
+    url = f'https://api.twitch.tv/kraken/users?login={channel}'
     headers = {'Client-ID': client_id,
-            'Accept': 'application/vnd.twitchtv.v5+json'}
+               'Accept': 'application/vnd.twitchtv.v5+json'}
     r = requests.get(url, headers=headers).json()
     return r['users'][0]['_id']

@@ -46,9 +46,9 @@ def emacs_resp():
     return '%s/emacs/vim/g'
 
 def atick_resp():
-    reaction = utils.get_reaction()
-    subject = utils.get_subject()
-    insult = utils.get_insult()
+    reaction = utils.rand_reaction()
+    subject = utils.rand_subject()
+    insult = utils.rand_insult()
     tick = str(randint(1, 1000))
     response = [
         reaction + " " + tick + " ticks have passed, DUH",
