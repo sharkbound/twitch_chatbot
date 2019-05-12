@@ -3,7 +3,7 @@ import config
 import dateutil.parser
 import datetime
 from utility import utils
-from random import randint
+from random import randint, choice
 
 from utility.utils import find_commands
 
@@ -65,7 +65,7 @@ def atick_resp():
         insult + " " + reaction + " DUH " + tick + "s have GONE BY DUDE",
     ]
 
-    return response[randint(0, len(response) - 1)]
+    return choice(response)
 
 
 def insult_resp(name):
