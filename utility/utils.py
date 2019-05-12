@@ -9,40 +9,40 @@ INSULTS = [
 ]
 
 SUBJECTS = [
-    "J", 
-    "MK", 
-    "Mike", 
-    "Michael", 
-    "Mike J", 
-    "Michael J", 
-    "Mike McIntire", 
-    "Michael McIntire", 
-    "Mike J McIntire", 
+    "J",
+    "MK",
+    "Mike",
+    "Michael",
+    "Mike J",
+    "Michael J",
+    "Mike McIntire",
+    "Michael McIntire",
+    "Mike J McIntire",
     "Michael J McIntire"
 ]
 
 REACTIONS = [
-    "a tick ?", 
-    "that's not a tick!", 
-    "OMG No!", 
-    "WTF No!", 
-    "LOL Focus!", 
-    "Look at The Clock", 
-    "Are you blind or what ?", 
-    "even the clock are laughing at you.", 
-    "what in the hell is wrong with ya?", 
+    "a tick ?",
+    "that's not a tick!",
+    "OMG No!",
+    "WTF No!",
+    "LOL Focus!",
+    "Look at The Clock",
+    "Are you blind or what ?",
+    "even the clock are laughing at you.",
+    "what in the hell is wrong with ya?",
     "YEEHAW"
     "OH COME ON!"
 ]
 
 def get_reaction():
-    return REACTIONS[randint(0, len(REACTIONS)-1)].replace("\n", "") + " "
+    return REACTIONS[randint(0, len(REACTIONS)-1)]
 
 def get_subject():
-    return SUBJECTS[randint(0, len(SUBJECTS)-1)].replace("\n", "") + " "
+    return SUBJECTS[randint(0, len(SUBJECTS)-1)]
 
 def get_insult():
-    return INSULTS[randint(0, len(INSULTS)-1)].replace("\n", "") + " "
+    return INSULTS[randint(0, len(INSULTS)-1)]
 
 
 def get_user_id(client_id, channel):

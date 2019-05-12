@@ -47,13 +47,16 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
         c = self.connection
 
         cmd_list = commands.cmd_list
-        for item in cmd_list:
-            if cmd == item['cmd']:
-                c.privmsg(self.channel, item['resp'])
-                break
+        if cmd == 'atick':
+            c.privmsg(self.channel, commands.atick_resp())
         else:
-            c.privmsg(self.channel, 'This command was not found')
-            c.privmsg(self.channel, cmd_list[0]['resp'])
+            for item in cmd_list:
+                if cmd == item['cmd']:
+                    c.privmsg(self.channel, item['resp'])
+                    break
+            else:
+                c.privmsg(self.channel, 'This command was not found')
+                c.privmsg(self.channel, cmd_list[0]['resp'])
 
 
 if __name__ == '__main__':

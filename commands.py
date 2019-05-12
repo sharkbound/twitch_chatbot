@@ -6,7 +6,7 @@ from utility import utils
 from random import randint
 
 def cmds_resp():
-    return "Avaliable Commands: !cmds !uptime !title !setup !editor !emacs"
+    return "Avaliable Commands: !cmds !uptime !title !setup !editor !emacs !atick"
 
 
 def leakinfo_resp():
@@ -47,15 +47,19 @@ def emacs_resp():
 def atick_resp():
     reaction = utils.get_reaction()
     subject = utils.get_subject()
+    insult = utils.get_insult()
     tick = str(randint(1, 1000))
     response = [
-        reaction + tick + "has passed, DUH",
+        reaction + " " + tick + " ticks have passed, DUH",
+        reaction + " " + tick + " ticks have passed " + insult,
+        insult + " " + reaction + " DUH " + tick + "s have GONE BY DUDE",
     ]
 
     return response[randint(0, len(response)-1)]
 
 def google_resp():
     pass
+
 
 cmd_list = [
     {'cmd': 'cmds', 'resp': cmds_resp()},
@@ -65,3 +69,5 @@ cmd_list = [
     {'cmd': 'editor', 'resp': editor_resp()},
     {'cmd': 'emacs', 'resp': emacs_resp()},
 ]
+
+
