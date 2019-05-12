@@ -74,6 +74,12 @@ def insult_resp(name):
 def holy_resp(name):
     return f"Holy Shit, {name}'s IQ is {randint(250, 10000)}. Now We Are the Children of {name}"
 
+def fucks_resp(name=""):
+    if name == "":
+        return f"This Guy Fucks"
+    else:
+        return f"{name}'s Fucks"
+
 def github_resp():
     return 'github.com/mmcintire96'
 
