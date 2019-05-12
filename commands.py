@@ -1,36 +1,42 @@
 import requests
-import json
 import config
 import dateutil.parser
 import datetime
 from utility import utils
 from random import randint
 
+from utility.utils import find_commands
+
+
 def cmds_resp():
-    return "Avaliable Commands: !cmds !uptime !title !setup !editor !emacs !atick !insult"
+    cmds = ' '.join(find_commands(globals()))
+    return f"Avaliable Commands: {cmds}"
 
 
 def leakinfo_resp():
     return
 
+
 def uptime_resp():
     headers = {'Client-ID': config.client_id}
     r = requests.get(f'{config.helix_base}/streams?user_id={config.user_id}',
-            headers=headers).json()['data'][0]
+                     headers=headers).json()['data'][0]
     today = datetime.datetime.now()
     s_time = dateutil.parser.parse(r['started_at'])
     tzone_adjust = 6
-    live_hour = (today.hour+tzone_adjust - s_time.hour)
+    live_hour = (today.hour + tzone_adjust - s_time.hour)
     live_min = (today.minute - s_time.minute)
 
     return f"{r['user_name']} has been live for {live_hour} hours and {live_min} minutes"
 
+
 def title_resp():
     headers = {'Client-ID': config.client_id}
     r = requests.get(f'{config.helix_base}/streams?user_id={config.user_id}',
-            headers=headers).json()['data'][0]
+                     headers=headers).json()['data'][0]
 
     return "Current Title: {}".format(r['title'])
+
 
 def setup_resp():
     comp = 'Intel i7 w/ GTX 980 Ti'
@@ -39,11 +45,14 @@ def setup_resp():
     per = 'Gigabyte Keyboard w/ MX-Blues and a Logitech Mouse'
     return f'Comps: {comp} running {os} and a {mbp} ---- Peripherals: {per}'
 
+
 def editor_resp():
     return 'VIM ----- THERE IS NO OTHER EDITOR ----- https://www.vim.org/'
 
+
 def emacs_resp():
     return '%s/emacs/vim/g'
+
 
 def atick_resp():
     reaction = utils.rand_reaction()
@@ -56,7 +65,8 @@ def atick_resp():
         insult + " " + reaction + " DUH " + tick + "s have GONE BY DUDE",
     ]
 
-    return response[randint(0, len(response)-1)]
+    return response[randint(0, len(response) - 1)]
+
 
 def insult_resp(name):
     if name == "":
@@ -71,17 +81,20 @@ def insult_resp(name):
     else:
         return "the api failed probably because you suck"
 
+
 def holy_resp(name):
     if name == "":
         return "Holy Shit you are dumb, add a name"
     else:
         return f"Holy Shit, {name}'s IQ is {randint(250, 10000)}. Now We Are the Children of {name}"
 
+
 def fucks_resp(name=""):
-    if name == "":
+    if not name:
         return f"This Guy Fucks"
     else:
         return f"{name}'s Fucks"
+
 
 def github_resp():
     return 'github.com/mmcintire96'
@@ -96,5 +109,3 @@ cmd_list = [
     {'cmd': 'emacs', 'resp': emacs_resp()},
     {'cmd': 'github', 'resp': github_resp()},
 ]
-
-

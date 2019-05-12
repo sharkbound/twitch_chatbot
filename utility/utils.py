@@ -54,3 +54,14 @@ def get_user_id(client_id, channel):
                'Accept': 'application/vnd.twitchtv.v5+json'}
     r = requests.get(url, headers=headers).json()
     return r['users'][0]['_id']
+
+
+def find_commands(items: dict):
+    # loop over globals passed as `items`
+    for name, item in items.items():
+        # check if it is a function and it is not private, and ends with `resp`
+        if callable(item) and not name.startswith('_') and name.endswith('resp'):
+            # separate the cmd name out of the key
+            cmd = name.split('_')[0]
+            # yield it in in command form
+            yield f'!{cmd}'
