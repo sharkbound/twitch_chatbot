@@ -38,26 +38,30 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
     def on_pubmsg(self, c, e):
         if e.arguments[0][:1] == '!':
             #split args on whitespace
+            name = ""
+            s_list = e.arguments[0].split(' ')
+            if len(s_list) == 2:
+                name = s_list[1]
             cmd = str(e.arguments[0]).split(' ')[0][1:]
             print(f'Rececived command: {cmd}')
-            self.do_command(e, cmd)
+            self.do_command(e, cmd, name)
         return
 
-    def do_command(self, e, cmd):
+    def do_command(self, e, cmd, name):
         c = self.connection
 
         cmd_list = commands.cmd_list
         if cmd == 'atick':
             c.privmsg(self.channel, commands.atick_resp())
+        elif cmd == 'insult':
+            c.privmsg(self.channel, commands.insult_resp(name))
         else:
             for item in cmd_list:
                 if cmd == item['cmd']:
                     c.privmsg(self.channel, item['resp'])
                     break
             else:
-                c.privmsg(self.channel, 'This command was not found')
-                c.privmsg(self.channel, cmd_list[0]['resp'])
-
+                pass
 
 if __name__ == '__main__':
     bot = TwitchBot(config.username, config.client_id,

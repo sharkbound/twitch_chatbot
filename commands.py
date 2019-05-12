@@ -1,4 +1,5 @@
 import requests
+import json
 import config
 import dateutil.parser
 import datetime
@@ -6,7 +7,7 @@ from utility import utils
 from random import randint
 
 def cmds_resp():
-    return "Avaliable Commands: !cmds !uptime !title !setup !editor !emacs !atick"
+    return "Avaliable Commands: !cmds !uptime !title !setup !editor !emacs !atick !insult"
 
 
 def leakinfo_resp():
@@ -57,8 +58,19 @@ def atick_resp():
 
     return response[randint(0, len(response)-1)]
 
-def google_resp():
-    pass
+def insult_resp(name):
+    if name == "":
+        name = '@wowotek'
+    else:
+        name = name
+    r = requests.get(f'https://insult.mattbas.org/api/insult.json?who={name}').json()
+    if r['error'] != 'False':
+        return r['insult']
+    else:
+        return "the api failed probably because you suck"
+
+def github_resp():
+    return 'github.com/mmcintire96'
 
 
 cmd_list = [
@@ -68,6 +80,7 @@ cmd_list = [
     {'cmd': 'setup', 'resp': setup_resp()},
     {'cmd': 'editor', 'resp': editor_resp()},
     {'cmd': 'emacs', 'resp': emacs_resp()},
+    {'cmd': 'github', 'resp': github_resp()},
 ]
 
 
