@@ -55,6 +55,10 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
             c.privmsg(self.channel, commands.atick_resp())
         elif cmd == 'insult':
             c.privmsg(self.channel, commands.insult_resp(name))
+        elif cmd == 'fucks':
+            c.privmsg(self.channel, commands.fucks_resp(name))
+        elif cmd == 'holy':
+            c.privmsg(self.channel, commands.holy_resp(name))    
         else:
             for item in cmd_list:
                 if cmd == item['cmd']:
