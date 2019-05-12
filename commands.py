@@ -2,10 +2,15 @@ import requests
 import config
 import dateutil.parser
 import datetime
-
+from utility import utils
+from random import randint
 
 def cmds_resp():
     return "Avaliable Commands: !cmds !uptime !title !setup !editor !emacs"
+
+
+def leakinfo_resp():
+    return
 
 def uptime_resp():
     headers = {'Client-ID': config.client_id}
@@ -16,13 +21,15 @@ def uptime_resp():
     tzone_adjust = 6
     live_hour = (today.hour+tzone_adjust - s_time.hour)
     live_min = (today.minute - s_time.minute)
+
     return f"{r['user_name']} has been live for {live_hour} hours and {live_min} minutes"
 
 def title_resp():
     headers = {'Client-ID': config.client_id}
     r = requests.get(f'{config.helix_base}/streams?user_id={config.user_id}',
             headers=headers).json()['data'][0]
-    return f"Current Title: {r['title']}"
+
+    return "Current Title: {}".format(r['title'])
 
 def setup_resp():
     comp = 'Intel i7 w/ GTX 980 Ti'
@@ -37,12 +44,23 @@ def editor_resp():
 def emacs_resp():
     return '%s/emacs/vim/g'
 
+def atick_resp():
+    reaction = utils.get_reaction()
+    subject = utils.get_subject()
+    tick = str(randint(1, 1000))
+    response = [
+        reaction + tick + "has passed, DUH",
+
+    ]
+
+def google_resp():
+    pass
 
 cmd_list = [
-        {'cmd': 'cmds', 'resp': cmds_resp()},
-        {'cmd': 'uptime', 'resp': uptime_resp()},
-        {'cmd': 'title', 'resp': title_resp()},
-        {'cmd': 'setup', 'resp': setup_resp()},
-        {'cmd': 'editor', 'resp': editor_resp()},
-        {'cmd': 'emacs', 'resp': emacs_resp()},]
-#print([x['resp'] for x in cmd_list if x['cmd'] == 'uptime'])
+    {'cmd': 'cmds', 'resp': cmds_resp()},
+    {'cmd': 'uptime', 'resp': uptime_resp()},
+    {'cmd': 'title', 'resp': title_resp()},
+    {'cmd': 'setup', 'resp': setup_resp()},
+    {'cmd': 'editor', 'resp': editor_resp()},
+    {'cmd': 'emacs', 'resp': emacs_resp()},
+]
