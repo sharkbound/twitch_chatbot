@@ -72,7 +72,10 @@ def insult_resp(name):
         return "the api failed probably because you suck"
 
 def holy_resp(name):
-    return f"Holy Shit, {name}'s IQ is {randint(250, 10000)}. Now We Are the Children of {name}"
+    if name == "":
+        return "Holy Shit you are dumb, add a name"
+    else:
+        return f"Holy Shit, {name}'s IQ is {randint(250, 10000)}. Now We Are the Children of {name}"
 
 def fucks_resp(name=""):
     if name == "":
