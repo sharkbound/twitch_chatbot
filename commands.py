@@ -61,6 +61,8 @@ def atick_resp():
 def insult_resp(name):
     if name == "":
         name = '@wowotek'
+    elif name == "@blizz191":
+        return holy_resp("@blizz191")
     else:
         name = name
     r = requests.get(f'https://insult.mattbas.org/api/insult.json?who={name}').json()
@@ -68,6 +70,9 @@ def insult_resp(name):
         return r['insult']
     else:
         return "the api failed probably because you suck"
+
+def holy_resp(name):
+    return f"Holy Shit, {name}'s IQ is {randint(250, 10000)}. Now We Are the Children of {name}"
 
 def github_resp():
     return 'github.com/mmcintire96'
